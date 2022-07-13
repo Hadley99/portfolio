@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import Projects from "./components/projects/Projects";
+import Wrapper from "./components/Wrapper";
+import { projectData } from "./components/data";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
+import Home from "./components/home/Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <main className="w-screen h-screen snap-y snap-mandatory  overflow-scroll ">
+      <Wrapper title="HELLO">
+        <Home />
+      </Wrapper>
+
+      <Wrapper title="SKILLS"></Wrapper>
+
+      <Wrapper title="PROJECTS">
+        <Swiper
+          navigation={true}
+          modules={[Navigation]}
+          onSwiper={(swiper) => console.log(swiper)}
+          className="mySwiper"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {projectData.map((project) => (
+            <SwiperSlide key={project.id}>
+              <Projects
+                title={project.title}
+                description={project.description}
+                code={project.code}
+                themeColor={project.color}
+                image={project.image}
+                link={project.link}
+                id={project.id}
+                tools={project.tools}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Wrapper>
+    </main>
   );
 }
 
